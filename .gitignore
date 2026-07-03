@@ -1,0 +1,18 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+
+# OS / editor junk
+.DS_Store
+Thumbs.db
+*.log
+
+# Env secrets (never commit real secrets; commit .env.example instead)
+.env
+.env.*
+!.env.example
+
+# TypeScript build info
+*.tsbuildinfo
