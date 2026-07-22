@@ -176,7 +176,7 @@ export default function Hero() {
               I'm <span className="text-white font-medium">{profile.name}</span>{" "}
               — {profile.headline.toLowerCase().replace(/\.$/, "")}. Currently
               crafting{" "}
-              <span className="text-white font-medium">Neeva AI</span>, an
+              <span className="text-white font-medium">Velness</span>, an
               AI-powered mental wellness platform.
             </motion.p>
 
@@ -236,14 +236,17 @@ export default function Hero() {
               <span className="absolute -bottom-5 -right-5 w-4 h-4 border-b border-r border-neutral-600" />
 
               <div className="portrait-frame relative rounded-[1.4rem] overflow-hidden bg-white shadow-glow">
-                <img
-                  src="/images/portrait.png"
-                  alt={profile.name}
-                  width={864}
-                  height={1080}
-                  fetchPriority="high"
-                  className="relative w-full aspect-[4/5] object-cover object-top grayscale contrast-105 transition-transform duration-[1.2s] ease-out group-hover:scale-[1.04]"
-                />
+                <picture>
+                  <source srcSet="/images/portrait.webp" type="image/webp" />
+                  <img
+                    src="/images/portrait.png"
+                    alt={profile.name}
+                    width={864}
+                    height={1080}
+                    fetchPriority="high"
+                    className="relative w-full aspect-[4/5] object-cover object-top grayscale contrast-105 transition-transform duration-[1.2s] ease-out group-hover:scale-[1.04]"
+                  />
+                </picture>
                 <div className="absolute inset-x-0 bottom-0 h-1/4 bg-gradient-to-t from-black/30 to-transparent pointer-events-none" />
               </div>
 
@@ -251,7 +254,7 @@ export default function Hero() {
                 <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-neutral-500">
                   Currently building
                 </p>
-                <p className="text-sm font-medium text-white mt-0.5">Neeva AI</p>
+                <p className="text-sm font-medium text-white mt-0.5">Velness</p>
               </div>
               <div className="absolute -top-4 -right-2 md:-right-5 bg-[#050505] border border-neutral-800 rounded-full px-4 py-1.5 shadow-glow">
                 <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-neutral-300">

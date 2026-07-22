@@ -16,3 +16,16 @@ Thumbs.db
 
 # TypeScript build info
 *.tsbuildinfo
+
+# Firebase local cache/config
+.firebase/
+.firebaserc
+
+# Playwright MCP cache
+.playwright-mcp/
+
+# Screenshots / deployment artifacts
+new-deployment-screenshot.png
+
+# Kilo agent config
+.kilo/

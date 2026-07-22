@@ -142,8 +142,9 @@ html.light .text-stroke {
 
 /* grain softer on light */
 html.light .grain::before {
-  opacity: 0.05;
-  filter: invert(1);
+  opacity: 0.014;
+  filter: none;
+  animation-duration: 18s;
 }
 
 /* extra light-mode tokens used by redesign */

@@ -4,8 +4,10 @@ import { profile } from "../data/portfolio";
 
 const links = [
   { label: "Email", value: profile.email, href: `mailto:${profile.email}` },
-  { label: "X / Twitter", value: "@datascythers", href: profile.x },
+  { label: "LinkedIn", value: "madewithnk", href: profile.linkedin },
+  { label: "X / Twitter", value: "@madewithnk", href: profile.x },
   { label: "GitHub", value: "DataScyther", href: profile.github },
+  { label: "Instagram", value: "@madewithnk", href: profile.instagram },
 ];
 
 export default function Contact() {
@@ -61,7 +63,7 @@ export default function Contact() {
           </p>
         </Reveal>
 
-        <div className="mt-14 grid sm:grid-cols-3 gap-px bg-neutral-900 border border-neutral-900 rounded-2xl overflow-hidden">
+        <div className="mt-14 grid sm:grid-cols-3 lg:grid-cols-5 gap-px bg-neutral-900 border border-neutral-900 rounded-2xl overflow-hidden">
           {links.map((l, i) => (
             <motion.a
               key={l.label}

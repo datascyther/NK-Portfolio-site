@@ -85,9 +85,9 @@ export default function Nav() {
       >
         <nav className="mx-auto max-w-6xl px-6 h-16 flex items-center justify-between">
           <a href="#top" className="font-mono text-sm tracking-widest select-none group">
-            <span className="text-white font-semibold">NK</span>
+            <span className="text-white font-semibold">Nishant</span>
             <span className="text-neutral-500 group-hover:text-white transition-colors duration-300">
-              /kumar
+              /k
             </span>
           </a>
 
