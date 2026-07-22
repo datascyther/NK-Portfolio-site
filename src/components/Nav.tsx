@@ -1,5 +1,6 @@
 import { AnimatePresence, motion, useScroll, useSpring } from "framer-motion";
 import { useEffect, useState } from "react";
+import { useLenis } from "lenis/react";
 import { useTheme } from "../hooks/useTheme";
 
 function ThemeToggle({ className = "" }: { className?: string }) {
@@ -51,18 +52,55 @@ export default function Nav() {
   const [scrolled, setScrolled] = useState(false);
   const { scrollYProgress } = useScroll();
   const progress = useSpring(scrollYProgress, { stiffness: 100, damping: 30 });
+  // null when Lenis is not mounted (reduced-motion path)
+  const lenis = useLenis();
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 40);
+    let ticking = false;
+    const update = () => {
+      const y =
+        lenis?.scroll ??
+        window.scrollY ??
+        document.documentElement.scrollTop ??
+        0;
+      setScrolled(y > 40);
+      ticking = false;
+    };
+    const onScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(update);
+    };
+
+    // Lenis emits scroll events; also listen to native for reduced-motion mode
     window.addEventListener("scroll", onScroll, { passive: true });
+    update();
     return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  }, [lenis]);
 
+  // Freeze page scroll while the mobile menu is open
   useEffect(() => {
-    document.body.style.overflow = open ? "hidden" : "";
+    if (open) {
+      lenis?.stop();
+      document.body.style.overflow = "hidden";
+    } else {
+      lenis?.start();
+      document.body.style.overflow = "";
+    }
     return () => {
+      lenis?.start();
       document.body.style.overflow = "";
     };
+  }, [open, lenis]);
+
+  // Close menu on Escape
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpen(false);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
   }, [open]);
 
   return (
@@ -82,6 +120,9 @@ export default function Nav() {
             ? "backdrop-blur-xl bg-[#050505]/70 border-b border-neutral-900"
             : "bg-transparent border-b border-transparent"
         }`}
+        style={{
+          paddingTop: "env(safe-area-inset-top)",
+        }}
       >
         <nav className="mx-auto max-w-6xl px-6 h-16 flex items-center justify-between">
           <a href="#top" className="font-mono text-sm tracking-widest select-none group">
@@ -122,8 +163,9 @@ export default function Nav() {
             <ThemeToggle />
             <button
               onClick={() => setOpen(!open)}
-              className="relative w-10 h-10 flex flex-col items-center justify-center gap-[6px]"
-              aria-label="Menu"
+              className="relative w-11 h-11 flex flex-col items-center justify-center gap-[6px]"
+              aria-label={open ? "Close menu" : "Open menu"}
+              aria-expanded={open}
             >
               <motion.span
                 animate={open ? { rotate: 45, y: 4 } : { rotate: 0, y: 0 }}
@@ -147,6 +189,9 @@ export default function Nav() {
             exit={{ clipPath: "inset(0 0 100% 0)" }}
             transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
             className="fixed inset-0 z-[65] bg-[#050505] flex flex-col justify-center px-8 lg:hidden"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Navigation menu"
           >
             <ul className="space-y-2">
               {links.map((l, i) => (

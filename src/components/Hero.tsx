@@ -1,15 +1,20 @@
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import { profile } from "../data/portfolio";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
 function Typewriter({ words }: { words: string[] }) {
-  const [text, setText] = useState("");
+  const reduced = useReducedMotion();
+  const [text, setText] = useState(reduced ? words[0] ?? "" : "");
   const [wordIdx, setWordIdx] = useState(0);
   const [deleting, setDeleting] = useState(false);
 
   useEffect(() => {
+    if (reduced) {
+      setText(words[0] ?? "");
+      return;
+    }
     const current = words[wordIdx % words.length];
     const t = setTimeout(
       () => {
@@ -29,12 +34,12 @@ function Typewriter({ words }: { words: string[] }) {
       deleting ? 40 : 80
     );
     return () => clearTimeout(t);
-  }, [text, deleting, wordIdx, words]);
+  }, [text, deleting, wordIdx, words, reduced]);
 
   return (
     <span className="block max-w-full truncate whitespace-nowrap font-mono text-sm text-neutral-400">
       {text}
-      <span className="animate-blink text-white">_</span>
+      {!reduced && <span className="animate-blink text-white">_</span>}
     </span>
   );
 }
@@ -64,16 +69,16 @@ function MaskedLine({
 
 export default function Hero() {
   const ref = useRef<HTMLElement>(null);
+  const reduced = useReducedMotion();
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start start", "end start"],
   });
-  // Subtle parallax only — small offsets so content can never travel into
-  // neighbouring UI (large translate was the cause of the CTA / scroll-cue overlap)
-  const yText = useTransform(scrollYProgress, [0, 1], [0, 48]);
-  const yImg = useTransform(scrollYProgress, [0, 1], [0, 28]);
-  const opacity = useTransform(scrollYProgress, [0, 0.55], [1, 0]);
-  const cueOpacity = useTransform(scrollYProgress, [0, 0.22], [1, 0]);
+  // Subtle parallax only — disabled when reduced motion is preferred
+  const yText = useTransform(scrollYProgress, [0, 1], reduced ? [0, 0] : [0, 48]);
+  const yImg = useTransform(scrollYProgress, [0, 1], reduced ? [0, 0] : [0, 28]);
+  const opacity = useTransform(scrollYProgress, [0, 0.55], reduced ? [1, 1] : [1, 0]);
+  const cueOpacity = useTransform(scrollYProgress, [0, 0.22], reduced ? [1, 1] : [1, 0]);
 
   return (
     <section
@@ -244,7 +249,10 @@ export default function Hero() {
                     width={864}
                     height={1080}
                     fetchPriority="high"
+                    decoding="async"
+                    sizes="(max-width: 640px) 13rem, (max-width: 768px) 15rem, (max-width: 1024px) 16rem, 19rem"
                     className="relative w-full aspect-[4/5] object-cover object-top grayscale contrast-105 transition-transform duration-[1.2s] ease-out group-hover:scale-[1.04]"
+                    draggable={false}
                   />
                 </picture>
                 <div className="absolute inset-x-0 bottom-0 h-1/4 bg-gradient-to-t from-black/30 to-transparent pointer-events-none" />
@@ -279,8 +287,12 @@ export default function Hero() {
             Scroll to explore
           </span>
           <motion.span
-            animate={{ y: [0, 5, 0] }}
-            transition={{ repeat: Infinity, duration: 1.8, ease: "easeInOut" }}
+            animate={reduced ? undefined : { y: [0, 5, 0] }}
+            transition={
+              reduced
+                ? undefined
+                : { repeat: Infinity, duration: 1.8, ease: "easeInOut" }
+            }
             className="hidden sm:block justify-self-center w-px h-6 bg-gradient-to-b from-neutral-500 to-transparent"
           />
           <span className="justify-self-end font-mono text-[10px] uppercase tracking-[0.3em] text-neutral-600 whitespace-nowrap">

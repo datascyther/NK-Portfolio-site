@@ -20,6 +20,12 @@ export function useTheme() {
     } catch {
       /* ignore */
     }
+    // Keep browser chrome (address bar) color in sync
+    const metas = document.querySelectorAll('meta[name="theme-color"]');
+    const color = theme === "light" ? "#fafafa" : "#050505";
+    if (metas.length) {
+      metas.forEach((m) => m.setAttribute("content", color));
+    }
     const t = window.setTimeout(() => root.classList.remove("theming"), 500);
     return () => window.clearTimeout(t);
   }, [theme]);

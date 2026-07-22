@@ -13,6 +13,11 @@
 
 html {
   scroll-behavior: auto;
+  /* Prevent layout shift from scrollbar appearing/disappearing */
+  scrollbar-gutter: stable;
+  /* Improve text rendering + mobile tap delay */
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 html.lenis,
@@ -41,7 +46,21 @@ body {
   color: #f5f5f5;
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
+  /* Stop rubber-band fighting Lenis / fixed chrome */
+  overscroll-behavior-y: none;
+  /* Safe areas for notched phones */
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+/* GPU compositing for scroll-linked / animated layers.
+   Avoid content-visibility:auto here — it skews document height
+   for Lenis and breaks scroll-linked / in-view animations. */
+main {
+  isolation: isolate;
 }
 
 ::selection {
@@ -217,12 +236,32 @@ html.light .primary-cta:hover {
   *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
+    animation-delay: 0s !important;
+    transition-duration: 0.01ms !important;
+    transition-delay: 0s !important;
     scroll-behavior: auto !important;
+  }
+
+  .grain::before,
+  .animate-marquee,
+  .animate-blink,
+  .animate-pulse-dot {
+    animation: none !important;
+  }
+
+  .grain::before {
+    opacity: 0.02;
+    transform: none !important;
   }
 }
 
 /* custom cursor — desktop only */
 @media (pointer: fine) {
+  html.has-custom-cursor,
+  html.has-custom-cursor * {
+    cursor: none !important;
+  }
+
   .cursor-dot,
   .cursor-ring {
     position: fixed;
@@ -232,6 +271,8 @@ html.light .primary-cta:hover {
     z-index: 100;
     border-radius: 9999px;
     will-change: transform;
+    transform: translate3d(-100px, -100px, 0);
+    contain: layout style paint;
   }
   .cursor-dot {
     width: 6px;
@@ -272,7 +313,7 @@ html.theming *::after {
     stroke 0.45s ease !important;
 }
 
-/* subtle grain */
+/* subtle grain — compositing-friendly fixed overlay */
 .grain::before {
   content: "";
   position: fixed;
@@ -284,19 +325,51 @@ html.theming *::after {
   opacity: 0.035;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   animation: grain 8s steps(10) infinite;
+  will-change: transform;
+  contain: strict;
+  /* Promote to own layer so scroll doesn't repaint grain every frame */
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+/* Mobile: static grain (animation is a common jank source on mid-range GPUs) */
+@media (hover: none), (pointer: coarse) {
+  .grain::before {
+    animation: none;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.028;
+    will-change: auto;
+  }
+
+  .animate-marquee {
+    /* Slightly slower on touch so it feels calmer and uses less GPU */
+    animation-duration: 40s;
+  }
+}
+
+/* Pause decorative loops when the tab is in the background (where supported) */
+@media (prefers-reduced-motion: no-preference) {
+  .grain::before,
+  .animate-marquee,
+  .animate-blink,
+  .animate-pulse-dot {
+    animation-play-state: running;
+  }
 }
 
 @keyframes grain {
-  0%, 100% { transform: translate(0, 0); }
-  10% { transform: translate(-5%, -10%); }
-  20% { transform: translate(-15%, 5%); }
-  30% { transform: translate(7%, -25%); }
-  40% { transform: translate(-5%, 25%); }
-  50% { transform: translate(-15%, 10%); }
-  60% { transform: translate(15%, 0%); }
-  70% { transform: translate(0%, 15%); }
-  80% { transform: translate(3%, 35%); }
-  90% { transform: translate(-10%, 10%); }
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  10% { transform: translate3d(-5%, -10%, 0); }
+  20% { transform: translate3d(-15%, 5%, 0); }
+  30% { transform: translate3d(7%, -25%, 0); }
+  40% { transform: translate3d(-5%, 25%, 0); }
+  50% { transform: translate3d(-15%, 10%, 0); }
+  60% { transform: translate3d(15%, 0%, 0); }
+  70% { transform: translate3d(0%, 15%, 0); }
+  80% { transform: translate3d(3%, 35%, 0); }
+  90% { transform: translate3d(-10%, 10%, 0); }
 }
 
 .text-stroke {
@@ -311,6 +384,17 @@ html.theming *::after {
 
 .animate-marquee {
   animation: marquee 30s linear infinite;
+  will-change: transform;
+  backface-visibility: hidden;
+}
+
+/* Pause marquee when off-screen via :has + content-visibility parent is not enough;
+   browsers still animate; keep transform on compositor only. */
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee {
+    animation: none !important;
+    transform: none;
+  }
 }
 
 @keyframes blink {
