@@ -14,7 +14,7 @@ export const profile = {
 
   about: [
     "I build AI products from product strategy and system architecture to production engineering.",
-    "Currently, I'm building Jousapce — an AI-powered wellness platform designed around persistent personal intelligence, contextual memory, guided wellness journeys, and adaptive recommendations.",
+    "Currently, I'm building Jousapce — your thoughts, connected over time — an AI-native journal that connects what you write, how you feel, and the conversations you have into useful context.",
     "My work goes beyond connecting an interface to an LLM. I design the systems around the model: orchestration, RAG, memory, retrieval, context engineering, backend infrastructure, evaluation, and the product experiences that make those systems useful.",
     "I work across React Native, TypeScript, AI infrastructure, backend systems, and product architecture — making technical decisions with the product outcome in mind rather than treating engineering and product as separate disciplines.",
     "Before going deeper into product engineering, I built a technology media brand to 170K+ subscribers and 3.5M+ monthly impressions, which taught me a different side of building: distribution, audience behavior, experimentation, and earning attention.",
@@ -65,7 +65,7 @@ export const experiences: Experience[] = [
     location: "Greater Delhi Area, India",
     mode: "On-site",
     description:
-      "Building Jousapce, an AI-powered wellness platform centered on persistent personal intelligence and guided wellness experiences. Designed the product from strategy and UX through a production-oriented AI runtime spanning orchestration, capability routing, long-term memory, Pinecone RAG, selective live intelligence, contextual recommendations, streaming, evaluation, and observability.",
+      "Building Jousapce — an AI-native journal that connects what you write, how you feel, and the conversations you have into useful context over time. Private by design, calm by design, built in public. Architected from strategy and UX through a production-oriented AI runtime spanning orchestration, long-term memory, contextual continuity, Pinecone RAG, selective live intelligence, streaming responses, and observability.",
     current: true,
   },
   {
@@ -121,7 +121,7 @@ export const projects: Project[] = [
     title: "Jousapce",
     period: "Sep 2025 — Present",
     summary:
-      "An AI-powered wellness platform built around persistent personal intelligence, contextual memory, guided wellness journeys, grounded knowledge, and adaptive recommendations rather than a standalone chatbot.",
+      "Most apps forget what came before. Jousapce preserves continuity across entries, conversations, and moods over time — private by design, calm by design, built in public.",
     highlights: [
       "Architected a centralized AI runtime using orchestration, intent classification, capability-based tool routing, context building, prompt assembly, and model abstraction",
       "Built long-term personal intelligence with memory extraction, semantic and profile memory, importance scoring, contextual retrieval, reflection summaries, and privacy controls",
@@ -129,7 +129,7 @@ export const projects: Project[] = [
       "Designed selective live-intelligence routing so current-information requests can use external retrieval without adding unnecessary search latency to every AI interaction",
       "Integrated NVIDIA Nemotron through NVIDIA NIM behind a model gateway with server-side secrets and streaming responses",
       "Added retrieval reranking, semantic caching, token budgeting, query rewriting, citations, observability, feature flags, and an evaluation framework",
-      "Designed the mobile product around Home, Chat, Journey, Community, and Profile, with guided CBT, meditation, breathing, reflection, mood intelligence, and wellness experiences",
+      "Designed the mobile product around Home, Conversations, Journal, Timeline, and Profile — with persistent memory across sessions, mood context (a signal not a score), and free-form reflection — calm by design, no streaks or engagement loops",
       "Evolved the product through architecture reviews, component-level implementation, QA, testing, design freezes, and disciplined one-objective engineering sprints",
     ],
     stack: [

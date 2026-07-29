@@ -182,7 +182,7 @@ export default function Hero() {
               — {profile.headline.toLowerCase().replace(/\.$/, "")}. Currently
               crafting{" "}
               <span className="text-white font-medium">Jousapce</span>, an
-              AI-powered mental wellness platform.
+              AI-native journal that connects context over time.
             </motion.p>
 
             <motion.div
