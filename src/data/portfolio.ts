@@ -14,7 +14,7 @@ export const profile = {
 
   about: [
     "I build AI products from product strategy and system architecture to production engineering.",
-    "Currently, I'm building Velness — an AI-powered wellness platform designed around persistent personal intelligence, contextual memory, guided wellness journeys, and adaptive recommendations.",
+    "Currently, I'm building Jousapce — an AI-powered wellness platform designed around persistent personal intelligence, contextual memory, guided wellness journeys, and adaptive recommendations.",
     "My work goes beyond connecting an interface to an LLM. I design the systems around the model: orchestration, RAG, memory, retrieval, context engineering, backend infrastructure, evaluation, and the product experiences that make those systems useful.",
     "I work across React Native, TypeScript, AI infrastructure, backend systems, and product architecture — making technical decisions with the product outcome in mind rather than treating engineering and product as separate disciplines.",
     "Before going deeper into product engineering, I built a technology media brand to 170K+ subscribers and 3.5M+ monthly impressions, which taught me a different side of building: distribution, audience behavior, experimentation, and earning attention.",
@@ -58,14 +58,14 @@ export interface Experience {
 export const experiences: Experience[] = [
   {
     role: "Founder & AI Product Engineer",
-    company: "Velness",
+    company: "Jousapce",
     type: "Self-employed",
     period: "Sep 2025 — Present",
     duration: "11 mos",
     location: "Greater Delhi Area, India",
     mode: "On-site",
     description:
-      "Building Velness, an AI-powered wellness platform centered on persistent personal intelligence and guided wellness experiences. Designed the product from strategy and UX through a production-oriented AI runtime spanning orchestration, capability routing, long-term memory, Pinecone RAG, selective live intelligence, contextual recommendations, streaming, evaluation, and observability.",
+      "Building Jousapce, an AI-powered wellness platform centered on persistent personal intelligence and guided wellness experiences. Designed the product from strategy and UX through a production-oriented AI runtime spanning orchestration, capability routing, long-term memory, Pinecone RAG, selective live intelligence, contextual recommendations, streaming, evaluation, and observability.",
     current: true,
   },
   {
@@ -118,7 +118,7 @@ export interface Project {
 export const projects: Project[] = [
   {
     index: "01",
-    title: "Velness",
+    title: "Jousapce",
     period: "Sep 2025 — Present",
     summary:
       "An AI-powered wellness platform built around persistent personal intelligence, contextual memory, guided wellness journeys, grounded knowledge, and adaptive recommendations rather than a standalone chatbot.",
