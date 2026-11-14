@@ -57,6 +57,6 @@ The Jouspace case study is grounded in the public repository and source modules,
 
 A faint static paper-grain SVG sits behind the content, with separate opacity values for light and dark modes. It does not intercept interaction or animate, and is disabled for print and forced-color displays. The asset is `public/textures/paper-grain.svg`.
 
-### Printed studio journal finish
+### Graphite and cobalt finish
 
-Warm ivory and charcoal surfaces use the existing static paper grain. Muted rust accents mark section numbers, active navigation, and selected gallery views. The Jouspace gallery is presented as a bordered project plate with figure captions. Theme colors are synchronized with browser chrome; texture is disabled for print and forced-color modes.
+Cool white and graphite surfaces use a subtle static grain. Cobalt marks the primary hero action, selected controls, and section details. Jouspace has a full-width desktop product presentation with a two-column introduction, a lavender image stage, and numbered captions; mobile uses a stacked layout and square imagery. Browser chrome follows the theme.

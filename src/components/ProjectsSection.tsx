@@ -16,8 +16,8 @@ function ProductGallery() {
   return (
     <div className="product-gallery">
       <div className="plate-heading">
-        <span>Plate 01 / Jouspace</span>
-        <span>Product studies</span>
+        <span>Jouspace / Product preview</span>
+        <span>Web + Android</span>
       </div>
       <button
         className="product-image-button"
@@ -64,7 +64,7 @@ function ProductGallery() {
         ))}
       </div>
       <div className="plate-caption" aria-live="polite">
-        <span className="plate-index">Fig. 0{selected + 1}</span>
+        <span className="plate-index">0{selected + 1}</span>
         <p className="gallery-caption">{shot.caption}</p>
       </div>
       <dialog

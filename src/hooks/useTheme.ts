@@ -22,7 +22,7 @@ export function useTheme() {
     }
     // Keep browser chrome (address bar) color in sync
     const metas = document.querySelectorAll('meta[name="theme-color"]');
-    const color = theme === "light" ? "#f2eadb" : "#201e1b";
+    const color = theme === "light" ? "#f7f8fb" : "#15171c";
     if (metas.length) {
       metas.forEach((m) => m.setAttribute("content", color));
     }
