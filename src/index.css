@@ -21,7 +21,7 @@
   --muted: #b5bccb;
   --quiet: #939eb3;
   --line: #353b49;
-  --accent: #93b0ff;
+  --accent: #c3c5ca;
   --header: rgb(21 23 28 / 96%);
   --paper-grain-opacity: 0.025;
 }
@@ -33,7 +33,7 @@ html.light {
   --muted: #576174;
   --quiet: #626d81;
   --line: #d3d9e5;
-  --accent: #244dcc;
+  --accent: #45474c;
   --header: rgb(247 248 251 / 96%);
   --paper-grain-opacity: 0.035;
 }
@@ -1784,7 +1784,7 @@ body::before {
   }
 }
 
-/* Graphite and cobalt: clear contrast, restrained colour, immersive product imagery. */
+/* Neutral graphite: clear contrast, restrained colour, immersive product imagery. */
 .section-index > span,
 .hero-identity .eyebrow,
 .desktop-nav a[aria-current],
@@ -1794,8 +1794,8 @@ body::before {
 .hero-identity .eyebrow::before { content: ""; width: 7px; height: 7px; background: var(--accent); }
 .hero-summary > p a { border-bottom-color: var(--accent); }
 .button { border-radius: 4px; }
-.hero-links .button-primary { background: #244dcc; color: #fff; }
-.hero-links .button-primary:hover { background: #193aa6; }
+.hero-links .button-primary { background: var(--ink); color: var(--canvas); }
+.hero-links .button-primary:hover { background: var(--accent); }
 .product-gallery { padding: 0; border: 0; background: transparent; box-shadow: none; }
 .plate-heading { display: flex; justify-content: space-between; gap: 20px; font-size: 11px; color: var(--muted); padding-bottom: 14px; }
 .plate-heading > span:first-child { color: var(--accent); }
