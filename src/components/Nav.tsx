@@ -112,6 +112,9 @@ export default function Nav() {
           ))}
         </div>
         <div className="nav-actions">
+          <a href={profile.resume} className="nav-contact" download>
+            Résumé <Arrow diagonal />
+          </a>
           <a href="#contact" className="nav-contact">
             Contact <Arrow diagonal />
           </a>
@@ -156,6 +159,10 @@ export default function Nav() {
         </div>
         {open && (
           <div className="mobile-nav" id="mobile-navigation" ref={menuRef}>
+            <a href={profile.resume} download onClick={() => setOpen(false)}>
+              <span className="mobile-nav-label">Download résumé</span>
+              <Arrow diagonal />
+            </a>
             {[...links, { label: "Contact", href: "#contact" }].map(
               (link, index) => (
                 <a

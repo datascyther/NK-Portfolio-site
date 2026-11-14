@@ -254,6 +254,18 @@ export default function ProjectsSection() {
               </a>
             ))}
           </div>
+          <div className="decision-story">
+            <div>
+              <p className="eyebrow">One engineering trade-off</p>
+              <h4>Writing first. Sync second.</h4>
+            </div>
+            <div className="decision-story-copy">
+              <p><strong>The problem.</strong> Saving a journal entry should not depend on a round trip to a server.</p>
+              <p><strong>The choice.</strong> A cloud-first design would put the network on the write path. Jouspace instead reads and writes locally, with optional Firestore sync running in the background.</p>
+              <p><strong>The cost.</strong> Sync needs its own conflict and deletion handling. The implementation uses timestamp-based merges and deletion tombstones; it does not merge concurrent edits character by character. AI reflections and cloud sync still need a connection.</p>
+              <a className="text-link" href={sourceUrl("src/store/cloudSync.ts")} target="_blank" rel="noreferrer">Read the sync implementation <Arrow diagonal /></a>
+            </div>
+          </div>
           <Architecture />
           <details className="project-notes">
             <summary>

@@ -8,6 +8,7 @@ export const profile = {
   motto: ["Build.", "Learn.", "Ship."],
   location: "Greater Delhi Area, India",
   email: "hello.nishantk@proton.me",
+  resume: "/NK-Resume.pdf",
   x: "https://x.com/madewithnk",
   github: "https://github.com/DataScyther",
   linkedin: "https://www.linkedin.com/in/madewithnk/",

@@ -629,6 +629,40 @@ html:has(dialog[open]) {
   grid-template-columns: repeat(3, 1fr);
   border-bottom: 1px solid var(--line);
 }
+.decision-story {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 40px;
+  padding-block: 36px;
+  border-bottom: 1px solid var(--line);
+}
+.decision-story h4 {
+  font-size: 24px;
+  line-height: 1.25;
+  letter-spacing: -0.035em;
+  margin-top: 14px;
+}
+.decision-story-copy p {
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.8;
+  margin-bottom: 16px;
+}
+.decision-story-copy strong {
+  color: var(--ink);
+  font-weight: 500;
+}
+.decision-story-copy .text-link { font-size: 13px; }
+.hiring-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px 30px;
+  margin-top: 28px;
+  font-size: 14px;
+}
+@media (max-width: 760px) {
+  .decision-story { grid-template-columns: 1fr; gap: 24px; }
+}
 .decision {
   display: flex;
   flex-direction: column;

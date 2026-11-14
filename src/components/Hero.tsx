@@ -31,15 +31,12 @@ export default function Hero() {
         </div>
         <div className="hero-summary">
           <p>
-            I take AI products from idea to production, shaping the experience
-            and building the systems behind it. Currently building{" "}
-            <a href="#jouspace">Jouspace</a>, a journal that connects thoughts
-            over time.
+            I build AI products from idea to release. My flagship project,{" "}
+            <a href="#jouspace">Jouspace</a>, brings together local-first
+            journaling, connected memories, and AI reflections.
           </p>
           <p>
-            Alongside building, I lead marketing and contribute to product
-            strategy at a stealth AI startup and explain AI and technology to a
-            170K+ YouTube audience.
+            I also explain AI and technology to a YouTube audience of 170K+.
           </p>
           <div className="hero-links">
             <a className="button button-primary" href="#work">

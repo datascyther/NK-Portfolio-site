@@ -85,6 +85,14 @@ export default function Contact() {
               </span>
             </div>
           </div>
+          <div className="hiring-links">
+            <a className="text-link" href={profile.resume} download>
+              Download résumé <Arrow diagonal />
+            </a>
+            <a className="text-link" href={profile.linkedin} target="_blank" rel="noreferrer">
+              LinkedIn <Arrow diagonal />
+            </a>
+          </div>
         </FadeIn>
         <footer className="site-footer">
           <a className="footer-name" href="#top">
