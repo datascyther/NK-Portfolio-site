@@ -15,26 +15,26 @@
 
 :root {
   color-scheme: dark;
-  --canvas: #15171c;
-  --surface: #1e2129;
-  --ink: #f0f2f7;
-  --muted: #b5bccb;
-  --quiet: #939eb3;
-  --line: #353b49;
-  --accent: #c3c5ca;
-  --header: rgb(21 23 28 / 96%);
+  --canvas: #111210;
+  --surface: #191a17;
+  --ink: #eeeee7;
+  --muted: #aaaca3;
+  --quiet: #85887e;
+  --line: #353730;
+  --accent: #c0cbb1;
+  --header: rgb(17 18 16 / 94%);
   --paper-grain-opacity: 0.025;
 }
 html.light {
   color-scheme: light;
-  --canvas: #f7f8fb;
-  --surface: #edf0f6;
-  --ink: #20242e;
-  --muted: #576174;
-  --quiet: #626d81;
-  --line: #d3d9e5;
-  --accent: #45474c;
-  --header: rgb(247 248 251 / 96%);
+  --canvas: #f7f6f2;
+  --surface: #eeede7;
+  --ink: #242620;
+  --muted: #64675d;
+  --quiet: #6d7165;
+  --line: #d9dbd0;
+  --accent: #526343;
+  --header: rgb(247 246 242 / 94%);
   --paper-grain-opacity: 0.035;
 }
 * {
@@ -1749,7 +1749,7 @@ html:has(dialog[open]) {
   }
 }
 
-/* A static paper finish. Texture is decorative and never covers text or controls. */
+/* A static archival-paper finish, behind the content and never interactive. */
 body::before {
   content: "";
   position: fixed;
@@ -1782,42 +1782,4 @@ body::before {
   body::before {
     display: none;
   }
-}
-
-/* Neutral graphite: clear contrast, restrained colour, immersive product imagery. */
-.section-index > span,
-.hero-identity .eyebrow,
-.desktop-nav a[aria-current],
-.gallery-controls button[aria-pressed="true"],
-.gallery-controls button[aria-pressed="true"] .gallery-number { color: var(--accent); }
-.hero-identity .eyebrow { display: flex; align-items: center; gap: 10px; }
-.hero-identity .eyebrow::before { content: ""; width: 7px; height: 7px; background: var(--accent); }
-.hero-summary > p a { border-bottom-color: var(--accent); }
-.button { border-radius: 4px; }
-.hero-links .button-primary { background: var(--ink); color: var(--canvas); }
-.hero-links .button-primary:hover { background: var(--accent); }
-.product-gallery { padding: 0; border: 0; background: transparent; box-shadow: none; }
-.plate-heading { display: flex; justify-content: space-between; gap: 20px; font-size: 11px; color: var(--muted); padding-bottom: 14px; }
-.plate-heading > span:first-child { color: var(--accent); }
-.product-image-button { border-radius: 6px; border: 1px solid var(--line); }
-.gallery-controls button[aria-pressed="true"]::after { background: var(--accent); }
-.plate-caption { display: grid; grid-template-columns: auto 1fr; gap: 14px; align-items: baseline; padding-top: 14px; }
-.plate-index { color: var(--accent); white-space: nowrap; font-size: 11px; }
-.plate-caption .gallery-caption { margin-top: 0; min-height: 40px; line-height: 1.65; }
-@media (min-width: 1000px) {
-  .flagship-main { grid-template-columns: 1fr; gap: 40px; }
-  .project-intro { display: grid; grid-template-columns: 1.15fr 1fr; column-gap: 90px; align-items: start; padding-top: 0; }
-  .project-kicker { grid-column: 1 / -1; margin-bottom: 28px; }
-  .project-intro > div:nth-child(2) { grid-column: 1; grid-row: 2 / 5; }
-  .project-description { max-width: 440px; }
-  .project-specs { grid-column: 2; margin-top: 0; max-width: none; }
-  .project-links, .project-stack { grid-column: 2; }
-  .product-image { aspect-ratio: 1.8; object-fit: contain; }
-  .product-image-button { background: #d6cbdc; }
-  .gallery-controls { justify-content: flex-start; gap: 48px; }
-  .gallery-controls button { min-width: 100px; text-align: left; }
-}
-@media (max-width: 759px) {
-  .plate-heading { font-size: 10px; }
-  .plate-caption { gap: 10px; }
 }
