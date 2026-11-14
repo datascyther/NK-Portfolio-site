@@ -45,7 +45,7 @@ Product images and the portrait were supplied directly by the user. Optimized co
 
 The hero leads with engineering and retains the confirmed 170K+ audience figure. Marketing and strategy responsibilities remain in Experience. The engineering trade-off describes the implemented local-first write path, timestamp-based last-write-wins merging and deletion tombstones; these were rechecked against the public sync source. It does not claim historical experiments or measured performance improvements.
 
-`public/NK-Resume.pdf` is a newly generated one-page resume based on the confirmed portfolio facts above, not an imported personal resume. It uses NK as the public name, includes the current role titles and dates, and marks the education end date as expected. `scripts/build-profile-assets.py` reproduces the resume and NK monogram icons using ReportLab and Pillow. The browser title is NK. No product recording was supplied or created; showcase images remain labeled and described as images.
+`public/NK-Resume.pdf` is the actual resume supplied by the user on November 15, 2026, copied byte-for-byte from their attached `Nishant_Kumar_Resume.pdf`. It replaces the previously generated resume. The attachment is a downloadable document, not instructions to alter the website biography. `scripts/build-profile-assets.py` generates only the NK monogram icons using Pillow and cannot overwrite the supplied resume. The browser title is NK. No product recording was supplied or created; showcase images remain labeled and described as images.
 
 ## Upstream
 
