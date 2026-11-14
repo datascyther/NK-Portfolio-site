@@ -2,14 +2,32 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23050505'/><text x='50' y='68' font-size='52' font-family='Helvetica,Arial' font-weight='bold' fill='white' text-anchor='middle'>NK</text></svg>" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-    <meta name="description" content="Nishant (NK) Kumar — AI Product Engineer. Build. Grow. Serve." />
-    <meta name="theme-color" content="#050505" media="(prefers-color-scheme: dark)" />
-    <meta name="theme-color" content="#fafafa" media="(prefers-color-scheme: light)" />
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23050505'/><text x='50' y='68' font-size='52' font-family='Helvetica,Arial' font-weight='bold' fill='white' text-anchor='middle'>NK</text></svg>"
+    />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+    <meta
+      name="description"
+      content="NK — AI Product Engineer. Explore Jouspace and the product thinking, AI systems, and engineering behind my work."
+    />
+    <meta
+      name="theme-color"
+      content="#111210"
+      media="(prefers-color-scheme: dark)"
+    />
+    <meta
+      name="theme-color"
+      content="#f7f6f2"
+      media="(prefers-color-scheme: light)"
+    />
     <meta name="color-scheme" content="dark light" />
     <meta name="format-detection" content="telephone=no" />
-    <title>Nishant Kumar — AI Product Engineer</title>
+    <title>NK — Selected Work</title>
     <script>
       (function () {
         try {
@@ -20,23 +38,25 @@
               : "dark");
           document.documentElement.classList.toggle("light", t === "light");
           // Keep theme-color in sync for browser chrome
-          var meta = document.querySelector('meta[name="theme-color"]:not([media])');
+          var meta = document.querySelector(
+            'meta[name="theme-color"]:not([media])',
+          );
           if (!meta) {
             meta = document.createElement("meta");
             meta.setAttribute("name", "theme-color");
             document.head.appendChild(meta);
           }
-          meta.setAttribute("content", t === "light" ? "#fafafa" : "#050505");
+          meta.setAttribute("content", t === "light" ? "#f7f6f2" : "#111210");
         } catch (e) {}
       })();
     </script>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="preload" as="image" href="/images/portrait.webp" type="image/webp" fetchpriority="high" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300..900&family=JetBrains+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
-    <noscript>
-      <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300..900&family=JetBrains+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
-    </noscript>
+    <link
+      rel="preload"
+      href="/fonts/PPNeueMontreal-Variable.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
   </head>
   <body>
     <div id="root"></div>

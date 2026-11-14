@@ -7,7 +7,7 @@ export function useTheme() {
     typeof document !== "undefined" &&
     document.documentElement.classList.contains("light")
       ? "light"
-      : "dark"
+      : "dark",
   );
 
   useEffect(() => {
@@ -22,7 +22,7 @@ export function useTheme() {
     }
     // Keep browser chrome (address bar) color in sync
     const metas = document.querySelectorAll('meta[name="theme-color"]');
-    const color = theme === "light" ? "#fafafa" : "#050505";
+    const color = theme === "light" ? "#f7f6f2" : "#111210";
     if (metas.length) {
       metas.forEach((m) => m.setAttribute("content", color));
     }
@@ -32,7 +32,7 @@ export function useTheme() {
 
   const toggle = useCallback(
     () => setTheme((t) => (t === "dark" ? "light" : "dark")),
-    []
+    [],
   );
 
   return { theme, toggle };

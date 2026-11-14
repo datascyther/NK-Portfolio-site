@@ -1,8 +1,9 @@
 export const profile = {
-  name: "Nishant K.",
-  firstName: "Nishant",
+  name: "NK",
+  firstName: "NK",
+  fullName: "Nishant Kumar",
   pronouns: "He/Him",
-  headline: "I build AI products, not just AI features.",
+  headline: "I build thoughtful AI products from concept to release.",
   role: "AI Product Engineer",
   motto: ["Build.", "Learn.", "Ship."],
   location: "Greater Delhi Area, India",
@@ -11,13 +12,11 @@ export const profile = {
   github: "https://github.com/DataScyther",
   linkedin: "https://www.linkedin.com/in/madewithnk/",
   instagram: "https://www.instagram.com/madewithnk/",
+  youtube: "https://www.youtube.com/@madewithnk",
 
   about: [
-    "I build AI products from product strategy and system architecture to production engineering.",
-    "Currently, I'm building Jousapce — your thoughts, connected over time — an AI-native journal that connects what you write, how you feel, and the conversations you have into useful context.",
-    "My work goes beyond connecting an interface to an LLM. I design the systems around the model: orchestration, RAG, memory, retrieval, context engineering, backend infrastructure, evaluation, and the product experiences that make those systems useful.",
-    "I work across React Native, TypeScript, AI infrastructure, backend systems, and product architecture — making technical decisions with the product outcome in mind rather than treating engineering and product as separate disciplines.",
-    "Before going deeper into product engineering, I built a technology media brand to 170K+ subscribers and 3.5M+ monthly impressions, which taught me a different side of building: distribution, audience behavior, experimentation, and earning attention.",
+    "Running @madewithnk has taught me to pay attention to how people respond to an idea. I study retention, experiment with formats, and use what I learn to decide what to improve. That habit has shaped how I approach product work, too.",
+    "I enjoy working through the decisions behind a product: what to build first, what context an AI system needs, and how to make the result clear to the person using it. Understanding those trade-offs is as much a part of the work as writing the code.",
   ],
 
   focus: [
@@ -31,77 +30,71 @@ export const profile = {
     "AI Product Engineering",
     "LLM Orchestration",
     "RAG & Memory Systems",
-    "React Native / TypeScript",
+    "React / TypeScript",
     "Product Architecture",
   ],
 };
 
-export const stats = [
-  { value: "170K+", label: "Subscribers scaled" },
-  { value: "3.5M+", label: "Monthly impressions" },
-  { value: "8+", label: "Projects built" },
-  { value: "4+", label: "Years building" },
-];
+export const stats = [{ value: "170K+", label: "YouTube subscribers" }];
 
 export interface Experience {
   role: string;
   company: string;
-  type: string;
+  type?: string;
   period: string;
-  duration: string;
   location: string;
-  mode: string;
+  mode?: string;
   description: string;
   current?: boolean;
 }
 
 export const experiences: Experience[] = [
   {
-    role: "Founder & AI Product Engineer",
-    company: "Jousapce",
-    type: "Self-employed",
-    period: "Sep 2025 — Present",
-    duration: "11 mos",
-    location: "Greater Delhi Area, India",
+    role: "AI-Native Founder’s Office Intern",
+    company: "Stealth AI Startup",
+    type: "Internship",
+    period: "Oct 2026 — Present",
+    location: "Gurugram, Haryana, India",
     mode: "On-site",
     description:
-      "Building Jousapce — an AI-native journal that connects what you write, how you feel, and the conversations you have into useful context over time. Private by design, calm by design, built in public. Architected from strategy and UX through a production-oriented AI runtime spanning orchestration, long-term memory, contextual continuity, Pinecone RAG, selective live intelligence, streaming responses, and observability.",
+      "Lead marketing strategy for the startup’s online presence and social media. Contribute to core product strategy across LLM and model choices, product engineering priorities, and strategic operations.",
     current: true,
   },
   {
-    role: "Project Management Intern",
+    role: "YouTuber (AI & Tech)",
+    company: "YouTube",
+    period: "Sep 2022 — Present",
+    location: "Greater Delhi Area, India",
+    description:
+      "Run @madewithnk, an AI and technology channel grown to 170K+ subscribers. Treat content like a product: analyze retention, test topics and formats, retire what doesn’t work, and improve what resonates.",
+    current: true,
+  },
+  {
+    role: "Independent Developer",
+    company: "Jouspace",
+    period: "Sep 2025 — Present",
+    location: "Greater Delhi Area, India",
+    description:
+      "Build Jouspace from product idea to implementation across web and Android. Own the experience and engineering across React, TypeScript, Capacitor, optional Firebase sync, and a stateless AI runtime with streamed reflections through NVIDIA NIM.",
+    current: true,
+  },
+  {
+    role: "PM Intern",
     company: "Pranayuv Technologies",
     type: "Internship",
-    period: "Mar 2026 — Present",
-    duration: "5 mos",
-    location: "Greater Delhi Area, India",
-    mode: "Remote",
+    period: "Mar 2026 — Aug 2026",
+    location: "Vijayawada, Andhra Pradesh, India",
     description:
-      "Led project operations across multiple initiatives by implementing structured workflows in Notion and Asana. Designed project tracking systems, documentation repositories, and SOPs to improve execution visibility, accountability, and operational consistency.",
-    current: true,
+      "Built project tracking workflows in Notion and Asana, documentation repositories, and SOPs to make progress, ownership, and next steps easier to follow.",
   },
   {
-    role: "Founder & Content Strategist",
-    company: "Mighty-Tech Shorts",
-    type: "Self-employed",
-    period: "Sep 2022 — Present",
-    duration: "3 yrs 11 mos",
-    location: "Greater Delhi Area, India",
-    mode: "On-site",
-    description:
-      "Built and scaled a technology media brand to 170,000+ subscribers and 3.5M+ monthly impressions through content strategy, audience analytics, retention analysis, experimentation, packaging optimization, and performance-driven iteration.",
-    current: true,
-  },
-  {
-    role: "AI Intern (IBM SkillsBuild)",
+    role: "AI Intern",
     company: "1M1B (1 Million for 1 Billion)",
     type: "Internship",
     period: "Dec 2025 — Jan 2026",
-    duration: "2 mos",
     location: "Greater Delhi Area, India",
-    mode: "Remote",
     description:
-      "Applied Generative AI, IBM Granite models, and retrieval-augmented generation concepts to sustainability-focused problem statements while working through the IBM SkillsBuild and 1M1B program.",
+      "Worked through the IBM SkillsBuild and 1M1B program, applying generative AI, IBM Granite models, and retrieval-augmented generation concepts to sustainability-focused problems.",
   },
 ];
 
@@ -118,62 +111,31 @@ export interface Project {
 export const projects: Project[] = [
   {
     index: "01",
-    title: "Jousapce",
+    title: "Jouspace",
     period: "Sep 2025 — Present",
     summary:
-      "Most apps forget what came before. Jousapce preserves continuity across entries, conversations, and moods over time — private by design, calm by design, built in public.",
+      "A local-first journal that connects thoughts over time, with optional sync and AI reflections grounded in the entries you choose.",
     highlights: [
-      "Architected a centralized AI runtime using orchestration, intent classification, capability-based tool routing, context building, prompt assembly, and model abstraction",
-      "Built long-term personal intelligence with memory extraction, semantic and profile memory, importance scoring, contextual retrieval, reflection summaries, and privacy controls",
-      "Implemented Pinecone-backed RAG while separating semantic retrieval from transactional application data stored in Supabase",
-      "Designed selective live-intelligence routing so current-information requests can use external retrieval without adding unnecessary search latency to every AI interaction",
-      "Integrated NVIDIA Nemotron through NVIDIA NIM behind a model gateway with server-side secrets and streaming responses",
-      "Added retrieval reranking, semantic caching, token budgeting, query rewriting, citations, observability, feature flags, and an evaluation framework",
-      "Designed the mobile product around Home, Conversations, Journal, Timeline, and Profile — with persistent memory across sessions, mood context (a signal not a score), and free-form reflection — calm by design, no streaks or engagement loops",
-      "Evolved the product through architecture reviews, component-level implementation, QA, testing, design freezes, and disciplined one-objective engineering sprints",
+      "Built a shared React and TypeScript product for web and native Android using Capacitor",
+      "Kept local storage as the immediate source of truth, with optional Firebase identity and background Firestore sync",
+      "Separated context assembly, prompt construction, model access, and streamed delivery in a stateless AI runtime",
+      "Implemented five AI capabilities using NVIDIA NIM, with server-side credentials and Server-Sent Events",
+      "Added frontend and runtime tests, TypeScript validation, and GitHub Actions release workflows",
     ],
     stack: [
-      "React Native",
-      "Expo",
+      "React",
       "TypeScript",
-      "Expo Router",
-      "Supabase",
-      "PostgreSQL",
-      "Pinecone",
+      "Capacitor",
+      "Firebase",
+      "Cloudflare Workers",
       "NVIDIA NIM",
-      "NVIDIA Nemotron",
-      "RAG",
-      "LLM Orchestration",
-      "Zustand",
-      "TanStack Query",
-      "NativeWind",
-      "Reanimated",
+      "SSE",
+      "Vitest",
     ],
     featured: true,
   },
   {
     index: "02",
-    title: "Customer Segmentation & Retention Analysis",
-    period: "Jan 2026 — Feb 2026",
-    summary:
-      "Unsupervised machine learning project analyzing purchasing behavior and customer retention patterns to produce interpretable business segments and actionable marketing insights.",
-    highlights: [
-      "Performed end-to-end data cleaning, preprocessing, exploratory analysis, and feature engineering",
-      "Applied dimensionality reduction and hierarchical clustering to identify interpretable customer segments",
-      "Analyzed behavioral differences between segments to surface retention and marketing opportunities",
-      "Built analytical visualizations translating model outputs into business-oriented findings",
-    ],
-    stack: [
-      "Python",
-      "pandas",
-      "NumPy",
-      "Scikit-learn",
-      "Matplotlib",
-      "Seaborn",
-    ],
-  },
-  {
-    index: "03",
     title: "Interactive UPI QR Payment Experience",
     period: "Dec 2024 — Feb 2025",
     summary:
@@ -271,9 +233,9 @@ export const skillGroups = [
 
 export const education = {
   school: "Dr. A.P.J. Abdul Kalam Technical University",
-  degree: "Bachelor of Technology — BTech",
-  field: "Computer Science Engineering (Data Science)",
-  period: "Aug 2023 — May 2027",
+  degree: "Bachelor of Technology",
+  field: "Computer Science and Engineering (Data Science)",
+  period: "Aug 2023 — Mar 2027",
 };
 
 export const marqueeItems = [
@@ -287,4 +249,104 @@ export const marqueeItems = [
   "Personal Intelligence",
   "Agentic Systems",
   "Product Strategy",
+];
+
+export const flagship = {
+  name: "Jouspace",
+  website: "https://jouspace-org.web.app/",
+  repository: "https://github.com/datascyther/Jouspace",
+  role: "Independent Developer",
+  platforms: "Web + Android",
+  screenshots: [
+    {
+      name: "Home",
+      image: "/images/jouspace/home.jpg",
+      alt: "Jouspace home screen showing memory-guided journal suggestions and recent entries",
+      caption:
+        "A thoughtful starting point. Pick up where your last thought left off.",
+    },
+    {
+      name: "Memory",
+      image: "/images/jouspace/memory.jpg",
+      alt: "Jouspace memory screen connecting journal entries through recurring themes",
+      caption:
+        "A thread through your thinking. Connected entries, themes, and reflection prompts.",
+    },
+    {
+      name: "AI",
+      image: "/images/jouspace/ai.jpg",
+      alt: "Jouspace AI screen with selected journal context and suggested reflection questions",
+      caption:
+        "Reflection with context. Bring selected entries into the conversation.",
+    },
+    {
+      name: "Journal",
+      image: "/images/jouspace/journal.jpg",
+      alt: "Jouspace journal editor with autosave and custom theme tags",
+      caption:
+        "Space for the words. A focused editor with autosave and personal themes.",
+    },
+  ],
+};
+
+export const engineeringDecisions = [
+  {
+    number: "01",
+    title: "Local first. Cloud optional.",
+    description:
+      "The interface reads and writes locally. Firestore mirrors entries in the background for signed-in users, with timestamp-based merges and deletion tombstones to keep devices in agreement.",
+    path: "src/store/cloudSync.ts",
+  },
+  {
+    number: "02",
+    title: "A stateless intelligence layer.",
+    description:
+      "The client supplies journal context per request. Shared context and prompt modules serve both Express and Cloudflare Workers, separating product logic from the transport.",
+    path: "worker/src/handler.ts",
+  },
+  {
+    number: "03",
+    title: "A deliberate model boundary.",
+    description:
+      "A typed gateway isolates model access from the rest of the runtime. NVIDIA NIM is the implemented provider; the interface supports cancellation and streamed delivery.",
+    path: "server/gateway/ModelGateway.ts",
+  },
+];
+
+export const pipeline = [
+  {
+    name: "Validate",
+    detail:
+      "Check the request before it reaches the model. Zod schemas bound the message history, entries, and capability-specific inputs.",
+    path: "server/schemas.ts",
+    label: "Typed request boundary",
+  },
+  {
+    name: "Context",
+    detail:
+      "Assemble client-supplied entries and personalization into the context for the requested capability. The assembler also supports seed context for development.",
+    path: "server/context/ContextAssembler.ts",
+    label: "Journal context assembly",
+  },
+  {
+    name: "Prompt",
+    detail:
+      "Build capability-specific instructions and messages through a shared prompt layer, used by both the development server and the Worker runtime.",
+    path: "server/prompt/PromptAssembler.ts",
+    label: "Shared prompt construction",
+  },
+  {
+    name: "Model",
+    detail:
+      "Route model access through a typed gateway. NVIDIA NIM supplies completions; credentials stay on the server rather than in the frontend.",
+    path: "server/gateway/ModelGateway.ts",
+    label: "Provider abstraction",
+  },
+  {
+    name: "Stream",
+    detail:
+      "Deliver the response incrementally through Server-Sent Events. The product can render a reflection as tokens arrive instead of waiting for the whole response.",
+    path: "server/stream/StreamController.ts",
+    label: "Incremental delivery",
+  },
 ];

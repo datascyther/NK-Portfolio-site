@@ -1,231 +1,182 @@
-import { AnimatePresence, motion, useScroll, useSpring } from "framer-motion";
-import { useEffect, useState } from "react";
-import { useLenis } from "lenis/react";
+import { useEffect, useRef, useState } from "react";
 import { useTheme } from "../hooks/useTheme";
-
-function ThemeToggle({ className = "" }: { className?: string }) {
-  const { theme, toggle } = useTheme();
-  const isDark = theme === "dark";
-  return (
-    <button
-      onClick={toggle}
-      aria-label={`Switch to ${isDark ? "light" : "dark"} mode`}
-      className={`relative w-9 h-9 rounded-full border border-neutral-700 flex items-center justify-center text-neutral-300 hover:border-white hover:text-white transition-all duration-300 ${className}`}
-    >
-      <AnimatePresence mode="wait" initial={false}>
-        <motion.span
-          key={theme}
-          initial={{ rotate: -90, opacity: 0, scale: 0.5 }}
-          animate={{ rotate: 0, opacity: 1, scale: 1 }}
-          exit={{ rotate: 90, opacity: 0, scale: 0.5 }}
-          transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-          className="flex items-center justify-center"
-        >
-          {isDark ? (
-            /* sun */
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round">
-              <circle cx="12" cy="12" r="4.2" />
-              <path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.55 1.55M17.15 17.15l1.55 1.55M18.7 5.3l-1.55 1.55M6.85 17.15L5.3 18.7" />
-            </svg>
-          ) : (
-            /* moon */
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M20.5 14.5A8.5 8.5 0 0 1 9.5 3.5a8.5 8.5 0 1 0 11 11Z" />
-            </svg>
-          )}
-        </motion.span>
-      </AnimatePresence>
-    </button>
-  );
-}
+import { Arrow } from "./Editorial";
+import { profile } from "../data/portfolio";
 
 const links = [
-  { label: "About", href: "#about" },
+  { label: "Projects", href: "#work" },
   { label: "Experience", href: "#experience" },
-  { label: "Projects", href: "#projects" },
-  { label: "Skills", href: "#skills" },
-  { label: "Contact", href: "#contact" },
+  { label: "About", href: "#about" },
 ];
 
 export default function Nav() {
+  const { theme, toggle } = useTheme();
   const [open, setOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-  const { scrollYProgress } = useScroll();
-  const progress = useSpring(scrollYProgress, { stiffness: 100, damping: 30 });
-  // null when Lenis is not mounted (reduced-motion path)
-  const lenis = useLenis();
+  const [active, setActive] = useState("");
+  const menuRef = useRef<HTMLDivElement>(null);
+  const triggerRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
-    let ticking = false;
+    const sections = links.map((link) => ({
+      href: link.href,
+      element: document.querySelector(link.href),
+    }));
     const update = () => {
-      const y =
-        lenis?.scroll ??
-        window.scrollY ??
-        document.documentElement.scrollTop ??
-        0;
-      setScrolled(y > 40);
-      ticking = false;
+      let current = "";
+      for (const section of sections) {
+        if (
+          section.element &&
+          section.element.getBoundingClientRect().top <=
+            window.innerHeight * 0.35
+        ) {
+          current = section.href;
+        }
+      }
+      setActive(current);
     };
-    const onScroll = () => {
-      if (ticking) return;
-      ticking = true;
-      requestAnimationFrame(update);
-    };
-
-    // Lenis emits scroll events; also listen to native for reduced-motion mode
-    window.addEventListener("scroll", onScroll, { passive: true });
     update();
-    return () => window.removeEventListener("scroll", onScroll);
-  }, [lenis]);
-
-  // Freeze page scroll while the mobile menu is open
-  useEffect(() => {
-    if (open) {
-      lenis?.stop();
-      document.body.style.overflow = "hidden";
-    } else {
-      lenis?.start();
-      document.body.style.overflow = "";
-    }
+    window.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("resize", update);
     return () => {
-      lenis?.start();
-      document.body.style.overflow = "";
+      window.removeEventListener("scroll", update);
+      window.removeEventListener("resize", update);
     };
-  }, [open, lenis]);
+  }, []);
 
-  // Close menu on Escape
   useEffect(() => {
     if (!open) return;
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setOpen(false);
+    const menu = menuRef.current;
+    const items = menu?.querySelectorAll<HTMLAnchorElement>("a");
+    items?.[0]?.focus();
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setOpen(false);
+        triggerRef.current?.focus();
+      }
+      if (event.key === "Tab" && items?.length) {
+        if (event.shiftKey && document.activeElement === items[0]) {
+          event.preventDefault();
+          triggerRef.current?.focus();
+        } else if (
+          !event.shiftKey &&
+          document.activeElement === items[items.length - 1]
+        ) {
+          event.preventDefault();
+          triggerRef.current?.focus();
+        }
+      }
+    };
+    const onOutside = (event: PointerEvent) => {
+      if (
+        event.target instanceof Node &&
+        !menu?.contains(event.target) &&
+        !triggerRef.current?.contains(event.target)
+      )
+        setOpen(false);
+    };
+    const breakpoint = window.matchMedia("(min-width: 760px)");
+    const onResize = () => {
+      if (breakpoint.matches) setOpen(false);
     };
     window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
+    document.addEventListener("pointerdown", onOutside);
+    breakpoint.addEventListener("change", onResize);
+    return () => {
+      window.removeEventListener("keydown", onKey);
+      document.removeEventListener("pointerdown", onOutside);
+      breakpoint.removeEventListener("change", onResize);
+    };
   }, [open]);
 
   return (
-    <>
-      {/* scroll progress bar */}
-      <motion.div
-        className="fixed top-0 left-0 right-0 h-[2px] bg-white origin-left z-[80]"
-        style={{ scaleX: progress }}
-      />
-
-      <motion.header
-        initial={{ y: -80, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
-        className={`fixed top-0 inset-x-0 z-[70] transition-all duration-500 ${
-          scrolled
-            ? "backdrop-blur-xl bg-[#050505]/70 border-b border-neutral-900"
-            : "bg-transparent border-b border-transparent"
-        }`}
-        style={{
-          paddingTop: "env(safe-area-inset-top)",
-        }}
-      >
-        <nav className="mx-auto max-w-6xl px-6 h-16 flex items-center justify-between">
-          <a href="#top" className="font-mono text-sm tracking-widest select-none group">
-            <span className="text-white font-semibold">Nishant</span>
-            <span className="text-neutral-500 group-hover:text-white transition-colors duration-300">
-              /k
-            </span>
-          </a>
-
-          {/* desktop links */}
-          <ul className="hidden lg:flex items-center gap-8">
-            {links.map((l) => (
-              <li key={l.href}>
-                <a
-                  href={l.href}
-                  className="relative text-[13px] uppercase tracking-[0.18em] text-neutral-400 hover:text-white transition-colors duration-300 group"
-                >
-                  {l.label}
-                  <span className="absolute -bottom-1 left-0 h-px w-0 bg-white transition-all duration-300 group-hover:w-full" />
-                </a>
-              </li>
-            ))}
-          </ul>
-
-          <div className="hidden lg:flex items-center gap-3">
-            <ThemeToggle />
+    <header className="site-header">
+      <nav className="shell nav-inner" aria-label="Main navigation">
+        <a
+          className="wordmark"
+          href="#top"
+          aria-label={`${profile.name}, back to top`}
+          onClick={() => setActive("")}
+        >
+          {profile.name}
+        </a>
+        <div className="desktop-nav">
+          {links.map((link) => (
             <a
-              href="mailto:hello.nishantk@proton.me"
-              className="inline-flex items-center gap-2 border border-neutral-700 rounded-full px-4 py-1.5 text-xs uppercase tracking-[0.15em] text-neutral-300 hover:bg-white hover:text-black hover:border-white transition-all duration-300"
+              key={link.href}
+              href={link.href}
+              aria-current={active === link.href ? "location" : undefined}
+              onClick={() => setActive(link.href)}
             >
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse-dot" />
-              Available
+              {link.label}
             </a>
-          </div>
-
-          {/* mobile: theme toggle + burger */}
-          <div className="lg:hidden flex items-center gap-2">
-            <ThemeToggle />
-            <button
-              onClick={() => setOpen(!open)}
-              className="relative w-11 h-11 flex flex-col items-center justify-center gap-[6px]"
-              aria-label={open ? "Close menu" : "Open menu"}
-              aria-expanded={open}
-            >
-              <motion.span
-                animate={open ? { rotate: 45, y: 4 } : { rotate: 0, y: 0 }}
-                className="block w-6 h-px bg-white"
-              />
-              <motion.span
-                animate={open ? { rotate: -45, y: -3 } : { rotate: 0, y: 0 }}
-                className="block w-6 h-px bg-white"
-              />
-            </button>
-          </div>
-        </nav>
-      </motion.header>
-
-      {/* mobile fullscreen menu */}
-      <AnimatePresence>
-        {open && (
-          <motion.div
-            initial={{ clipPath: "inset(0 0 100% 0)" }}
-            animate={{ clipPath: "inset(0 0 0% 0)" }}
-            exit={{ clipPath: "inset(0 0 100% 0)" }}
-            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-            className="fixed inset-0 z-[65] bg-[#050505] flex flex-col justify-center px-8 lg:hidden"
-            role="dialog"
-            aria-modal="true"
-            aria-label="Navigation menu"
+          ))}
+        </div>
+        <div className="nav-actions">
+          <a href="#contact" className="nav-contact">
+            Contact <Arrow diagonal />
+          </a>
+          <button
+            className="theme-toggle"
+            onClick={toggle}
+            aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
+            title={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
           >
-            <ul className="space-y-2">
-              {links.map((l, i) => (
-                <motion.li
-                  key={l.href}
-                  initial={{ opacity: 0, x: -30 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.2 + i * 0.07, duration: 0.5 }}
-                >
-                  <a
-                    href={l.href}
-                    onClick={() => setOpen(false)}
-                    className="flex items-baseline gap-4 py-3 border-b border-neutral-900"
-                  >
-                    <span className="font-mono text-xs text-neutral-600">0{i + 1}</span>
-                    <span className="text-4xl font-light tracking-tight text-white">
-                      {l.label}
-                    </span>
-                  </a>
-                </motion.li>
-              ))}
-            </ul>
-            <motion.a
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.6 }}
-              href="mailto:hello.nishantk@proton.me"
-              className="mt-10 font-mono text-sm text-neutral-500"
+            <svg
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              aria-hidden="true"
             >
-              hello.nishantk@proton.me
-            </motion.a>
-          </motion.div>
+              {theme === "dark" ? (
+                <>
+                  <circle cx="12" cy="12" r="4" />
+                  <path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5" />
+                </>
+              ) : (
+                <path d="M20.5 14A8.5 8.5 0 0 1 10 3.5 8.5 8.5 0 1 0 20.5 14Z" />
+              )}
+            </svg>
+          </button>
+          <button
+            ref={triggerRef}
+            className="menu-toggle"
+            aria-expanded={open}
+            aria-controls="mobile-navigation"
+            onClick={() => setOpen(!open)}
+          >
+            {open ? "Close" : "Menu"}
+            <span className="menu-lines" aria-hidden="true">
+              <span />
+              <span />
+            </span>
+          </button>
+        </div>
+        {open && (
+          <div className="mobile-nav" id="mobile-navigation" ref={menuRef}>
+            {[...links, { label: "Contact", href: "#contact" }].map(
+              (link, index) => (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  aria-current={active === link.href ? "location" : undefined}
+                  onClick={() => setOpen(false)}
+                >
+                  <span className="mobile-nav-label">
+                    <span className="mobile-nav-index" aria-hidden="true">
+                      0{index + 1}
+                    </span>
+                    {link.label}
+                  </span>
+                  <Arrow diagonal />
+                </a>
+              ),
+            )}
+          </div>
         )}
-      </AnimatePresence>
-    </>
+      </nav>
+    </header>
   );
 }
