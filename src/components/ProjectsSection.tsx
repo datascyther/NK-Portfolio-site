@@ -15,6 +15,10 @@ function ProductGallery() {
   const shot = flagship.screenshots[selected];
   return (
     <div className="product-gallery">
+      <div className="plate-heading">
+        <span>Plate 01 / Jouspace</span>
+        <span>Product studies</span>
+      </div>
       <button
         className="product-image-button"
         onClick={() => dialogRef.current?.showModal()}
@@ -59,9 +63,10 @@ function ProductGallery() {
           </button>
         ))}
       </div>
-      <p className="gallery-caption" aria-live="polite">
-        {shot.caption}
-      </p>
+      <div className="plate-caption" aria-live="polite">
+        <span className="plate-index">Fig. 0{selected + 1}</span>
+        <p className="gallery-caption">{shot.caption}</p>
+      </div>
       <dialog
         className="image-dialog"
         ref={dialogRef}
